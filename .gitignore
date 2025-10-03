@@ -1,0 +1,18 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.vscode/
+*.ncb
+*.sdf
+*.opendb
+*.dbmdl
+
+# Build
+bin/
+obj/
+
+# Otros
+*.log
+*.DS_Store
+wwwroot/lib/

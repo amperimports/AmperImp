@@ -1,0 +1,44 @@
+﻿@model List<AmperImp.Models.Producto>
+@using AmperImp.Models
+
+<table class="table table-bordered table-striped align-middle text-center">
+    <thead class="text-center">
+        <tr>
+            <th class="align-middle text-center">Nombre</th>
+            <th class="align-middle text-center">Categoría</th>
+            <th class="align-middle text-center">Stock</th>
+            <th class="align-middle text-center">Precio Venta</th>
+            <th class ="align-middle text-center">Costo</th>
+            <th class="align-middle text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Nombre</td>
+                <td>@p.Categoria</td>
+                <td>
+                    <!-- El JSON de talles se guarda en data-stock -->
+                    <button class="btn btn-sm btn-info" title="Ver" onclick="abrirModal('/Productos/Show/@p.Id')">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                </td>
+                <td style="white-space:nowrap;">@String.Format("{0:C}", p.PrecioVenta)</td>
+                <td style="white-space:nowrap;">@String.Format("{0:C}", p.Costo)</td>
+                <td class="text-center">
+                    <button class="btn btn-sm btn-warning" title="Editar" onclick="abrirModal('/Productos/CreateOrEdit/@p.Id')">
+                        <i class="fa fa-pen"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger" title="Eliminar" onclick="eliminar(@p.Id)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    
+}

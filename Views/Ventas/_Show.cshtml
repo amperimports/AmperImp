@@ -1,0 +1,53 @@
+﻿@model AmperImp.Models.Venta
+@using AmperImp.Models
+
+<div class="card bg-dark text-light p-4 mx-auto" style="max-width:auto;">
+    <!-- Encabezado -->
+    <div class="text-center mb-2">
+        <h4 class="fw-bold">Venta #@Model.Id</h4>
+        <p class="mb-1"><strong>Fecha:</strong> @Model.Fecha.ToString("dd/MM/yyyy HH:mm")</p>
+        <p class="mb-1"><strong>Comprador:</strong> @Model.Detalles.FirstOrDefault()?.Comprador</p>
+        <p class="fs-5 fw-bold text-success mt-2">
+            Total: @String.Format("{0:C}", Model.Detalles.Sum(d => d.Subtotal))
+        </p>
+    </div>
+
+    <hr class="border-light" />
+
+    <!-- Detalles -->
+    <div class="mb-3">
+        <h6 class="fw-semibold text-center mb-3">Detalles de la venta</h6>
+        <div class="table-responsive">
+            <table class="table table-sm table-dark table-striped table-bordered align-middle text-center">
+                <thead>
+                    <tr>
+                        <th class="align-middle text-center">Producto</th>
+                        <th class="align-middle text-center">Talle</th>
+                        <th class="align-middle text-center">Cantidad</th>
+                        <th class="align-middle text-center">Unitario</th>
+                        <th class="align-middle text-center">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var d in Model.Detalles)
+                    {
+                        <tr>
+                            <td>@d.NombreProducto</td>
+                            <td>@d.Talle</td>
+                            <td>@d.Cantidad</td>
+                            <td style="white-space:nowrap;">@String.Format("{0:C}", d.PrecioUnitario)</td>
+                            <td style="white-space:nowrap;">@String.Format("{0:C}", d.Subtotal)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Botón -->
+    <div class="text-center mt-3">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+        </button>
+    </div>
+</div>

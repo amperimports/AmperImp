@@ -1,0 +1,228 @@
+﻿/* AmperImp.styles.css */
+
+/* =====================
+   VARIABLES DE COLOR
+===================== */
+:root {
+    --color-primario: #0d6efd; /* Azul bootstrap */
+    --color-secundario: #6c757d; /* Gris para textos secundarios */
+    --color-fondo: #1e1e12f; /* Fondo general */
+    --color-boton-success: #198754; /* Verde botones de acción positiva */
+    --color-boton-warning: #ffc107; /* Amarillo de alerta / editar */
+    --color-boton-danger: #dc3545; /* Rojo eliminar */
+    --color-tabla-header: #e9ecef; /* Encabezado tablas */
+    --color-texto: #212529; /* Texto principal */
+}
+
+
+/* =====================
+   TEXTOS
+===================== */
+.text-primary {
+    color: var(--color-primario) !important;
+}
+
+.text-secondary {
+    color: var(--color-secundario) !important;
+}
+
+.text-success {
+    color: var(--color-boton-success) !important;
+}
+
+.text-warning {
+    color: var(--color-boton-warning) !important;
+}
+
+.text-danger {
+    color: var(--color-boton-danger) !important;
+}
+
+/* =====================
+   BACKGROUNDS
+===================== */
+.bg-primary {
+    background-color: var(--color-primario) !important;
+    color: #fff !important;
+}
+
+.bg-secondary {
+    background-color: var(--color-secundario) !important;
+    color: #fff !important;
+    /* =====================
+   TIPOGRAFÍA
+===================== */
+    body, input, select, textarea, button {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.95rem;
+    color: var(--color-texto);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--color-primario);
+}
+
+/* =====================
+   LAYOUT GENERAL
+===================== */
+body {
+    background-color: var(--color-fondo);
+}
+
+.container {
+    max-width: 1200px;
+}
+
+/* =====================
+   NAVBAR
+===================== */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+    .nav-link:hover {
+        color: var(--color-primario);
+    }
+
+/* =====================
+   TABLAS
+===================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+    table th {
+        background-color: var(--color-tabla-header);
+        font-weight: 600;
+        text-align: center;
+    }
+
+    table td, table th {
+        padding: 0.75rem 1rem;
+        vertical-align: middle;
+    }
+
+    table tbody tr:hover {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+
+/* =====================
+   BOTONES
+===================== */
+.btn {
+    font-weight: 500;
+    border-radius: 0.375rem;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+
+    .btn-primary:hover {
+        background-color: #0b5ed7;
+        border-color: #0b5ed7;
+    }
+
+.btn-success {
+    background-color: var(--color-boton-success);
+    border-color: var(--color-boton-success);
+}
+
+.btn-warning {
+    background-color: var(--color-boton-warning);
+    border-color: var(--color-boton-warning);
+    color: #212529;
+}
+
+.btn-danger {
+    background-color: var(--color-boton-danger);
+    border-color: var(--color-boton-danger);
+}
+
+.btn-sm {
+    font-size: 0.85rem;
+}
+
+/* =====================
+   FORMULARIOS
+===================== */
+.form-control, .form-select {
+    border-radius: 0.375rem;
+    box-shadow: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+    .form-control:focus, .form-select:focus {
+        border-color: var(--color-primario);
+        box-shadow: 0 0 0 0.2rem rgba(13,110,253,.25);
+    }
+
+/* =====================
+   MODALES
+===================== */
+.modal-content {
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.modal-header {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+}
+
+/* =====================
+   ICONOS (Font Awesome)
+===================== */
+.fa {
+    margin-right: 0.25rem;
+}
+
+/* =====================
+   FILTROS Y INPUTS
+===================== */
+#filtroNombre, #filtroCategoria, #filtroTalle {
+    margin-bottom: 0.5rem;
+}
+
+/* =====================
+   ESTILOS ADICIONALES
+===================== */
+.text-end {
+    text-align: right !important;
+}
+
+span.stock-talle {
+    display: inline-block;
+    min-width: 60px;
+    margin-right: 0.5rem;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+@media (max-width: 767px) {
+    table th, table td {
+        font-size: 0.85rem;
+        padding: 0.5rem;
+    }
+
+    .btn {
+        font-size: 0.85rem;
+        padding: 0.375rem 0.75rem;
+    }
+}

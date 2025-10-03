@@ -1,0 +1,103 @@
+﻿@using AmperImp.Models
+
+@{
+    ViewData["Title"] = "Ventas";
+    var productos = ViewBag.Productos as List<Producto>;
+}
+
+<h2 class="mb-4 text-primary text-center">Ventas</h2>
+
+<div class="row my-3 g-2 align-items-end">
+    <div class="col-md-2">
+        <label for="filtroComprador" class="form-label fw-bold">Comprador</label>
+        <input type="text" id="filtroComprador" class="form-control" placeholder="Nombre del comprador..." />
+    </div>
+
+    <div class="col-md-3">
+        <label for="filtroProducto" class="form-label fw-bold">Producto</label>
+        <select id="filtroProducto" class="form-select">
+            <option value="">-- Todos los productos --</option>
+            @foreach (var p in productos)
+            {
+                <option value="@p.Id">@p.Nombre</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <label for="filtroFechaDesde" class="form-label fw-bold">Fecha desde</label>
+        <input type="date" id="filtroFechaDesde" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <label for="filtroFechaHasta" class="form-label fw-bold">Fecha hasta</label>
+        <input type="date" id="filtroFechaHasta" class="form-control" />
+    </div>
+
+    <div class="col-md-3 d-flex gap-2">
+        <button class="btn btn-primary w-50" id="btnBuscar">
+            <i class="fa fa-filter me-1"></i> Filtrar
+        </button>
+        <button class="btn btn-success w-50" onclick="abrirModal('/Ventas/CreateOrEdit')">
+            <i class="fa fa-plus me-1"></i> Agregar
+        </button>
+    </div>
+</div>
+
+<div id="divResultados"></div>
+
+@section Scripts {
+    <script>
+        function abrirModal(url) {
+            $("#modalGenerico .modal-content").load(url, function () {
+                $("#modalGenerico").modal("show");
+            });
+        }
+
+        function eliminar(id) {
+            if (confirm("¿Seguro que deseas eliminar esta venta?")) {
+                $.post("/Ventas/Delete/" + id, function () {
+                    cargarTabla();
+                });
+            }
+        }
+
+        function cargarTabla() {
+            var comprador = $("#filtroComprador").val();
+            var producto = $("#filtroProducto").val();
+            var fechaDesde = $("#filtroFechaDesde").val();
+            var fechaHasta = $("#filtroFechaHasta").val();
+
+            $("#divResultados").load("/Ventas/ViewAll?comprador=" + encodeURIComponent(comprador)
+                + "&producto=" + encodeURIComponent(producto)
+                + "&fechaDesde=" + encodeURIComponent(fechaDesde)
+                + "&fechaHasta=" + encodeURIComponent(fechaHasta));
+        }
+
+        $(document).ready(function () {
+            cargarTabla();
+
+            $("#btnBuscar").click(function () {
+                cargarTabla();
+            });
+
+            $(document).on("submit", "form", function (e) {
+                e.preventDefault();
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),
+                    data: form.serialize(),
+                    success: function (res) {
+                        if (res.success) {
+                            $("#modalGenerico").modal("hide");
+                            cargarTabla();
+                        } else {
+                            $("#modalGenerico .modal-content").html(res);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

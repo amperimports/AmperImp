@@ -1,0 +1,96 @@
+﻿@model AmperImp.Models.Producto
+@using AmperImp.Models
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <form id="formProducto" asp-action="CreateOrEdit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Nombre + Categoría -->
+            <div class="row ">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Nombre" class="form-label text-primary fw-bold">Nombre del producto</label>
+                    <input asp-for="Nombre" class="form-control" placeholder="Ej: Camiseta Club" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Categoria" class="form-label text-primary fw-bold">Categoría</label>
+                    <select asp-for="Categoria" class="form-select">
+                        @foreach (var cat in ViewBag.Categorias as List<CategoriaProducto>)
+                        {
+                            <option value="@cat">@cat</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <!-- Precio + Costo -->
+            <div class="row ">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="PrecioVenta" class="form-label text-primary fw-bold">Precio de venta</label>
+                    <input asp-for="PrecioVenta" class="form-control" step="0.01" placeholder="0.00" />
+                    <span asp-validation-for="PrecioVenta" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Costo" class="form-label text-primary fw-bold">Costo</label>
+                    <input asp-for="Costo" class="form-control" step="0.01" placeholder="0.00" />
+                    <span asp-validation-for="Costo" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Stock por talle -->
+            <div class="mb-3">
+                <label class="form-label text-primary fw-bold">Stock por talle</label>
+                <div class="row g-3">
+                    @foreach (Talle t in ViewBag.Talles as List<Talle>)
+                    {
+                        var stock = Model.StockTalles.FirstOrDefault(s => s.Talle == t)?.Cantidad ?? 0;
+                        <div class="col-6 col-md-3">
+                            <div class="form-floating">
+                                <input type="number" name="StockTalles[@t]" value="@stock"
+                                       class="form-control @(stock == 0 ? "text-danger" : "text-success")" min="0" />
+                                <label>@t</label>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- Botones -->
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary me-2">
+                    <i class="fa fa-floppy-disk me-1"></i> Guardar
+                </button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                    <i class="fa fa-xmark me-1"></i> Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $("#formProducto").submit(function (e) {
+            e.preventDefault();
+            var formData = new FormData(this); // incluye archivos
+
+            $.ajax({
+                url: $(this).attr("action"),
+                type: $(this).attr("method"),
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    if (res.success) {
+                        $("#modalGenerico").modal("hide");
+                        cargarTabla();
+                    } else {
+                        $("#modalGenerico .modal-content").html(res);
+                    }
+                }
+            });
+        });
+    </script>
+}

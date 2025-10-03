@@ -1,0 +1,35 @@
+﻿@model AmperImp.Models.Producto
+@using AmperImp.Models
+
+
+<div class="card bg-dark text-light p-4 mx-auto" style="max-width:auto;">
+    <div class="text-center mb-2">
+        <h4 class="fw-bold">@Model.Nombre</h4>
+        <p class="mb-1"><strong>Categoría:</strong> @Model.Categoria</p>
+        <p class="mb-1"><strong>Precio Venta:</strong> @String.Format("{0:C}", Model.PrecioVenta)</p>
+        <p class="mb-1"><strong>Costo:</strong> @String.Format("{0:C}", Model.Costo)</p>
+    </div>
+
+    <hr />
+
+    <div class="mb-4">
+        <h6 class="fw-semibold text-center mb-3">Stock por talle:</h6>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            @foreach (var s in Model.StockTalles)
+            {
+                var bgClass = s.Cantidad > 0 ? "bg-success" : "bg-danger";
+                <div class="p-3 border rounded text-white text-center @bgClass" style="min-width:70px;">
+                    <div class="fw-semibold">@s.Talle</div>
+                    <div>@s.Cantidad</div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="text-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+        </button>
+    </div>
+</div>
+

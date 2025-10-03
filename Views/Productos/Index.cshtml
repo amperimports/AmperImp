@@ -1,0 +1,99 @@
+﻿@using AmperImp.Models
+
+@{
+    ViewData["Title"] = "Productos";
+    var categorias = ViewBag.Categorias as List<CategoriaProducto>;
+    var talles = ViewBag.Talles as List<Talle>;
+}
+
+<h2 class="mb-4 text-primary text-center">Productos</h2>
+
+<div class="row my-3 g-2 align-items-end">
+    <div class="col-md-3">
+        <label for="filtroNombre" class="form-label fw-semibold">Nombre</label>
+        <input type="text" id="filtroNombre" class="form-control" placeholder="Buscar producto..." />
+    </div>
+    <div class="col-md-3">
+        <label for="filtroCategoria" class="form-label fw-semibold">Categoría</label>
+        <select id="filtroCategoria" class="form-select">
+            <option value="">-- Todas las categorías --</option>
+            @foreach (var c in categorias)
+            {
+                <option value="@c">@c</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <label for="filtroTalle" class="form-label fw-semibold">Talle</label>
+        <select id="filtroTalle" class="form-select">
+            <option value="">-- Todos los talles --</option>
+            @foreach (var t in talles)
+            {
+                <option value="@t">@t</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3 d-flex gap-2">
+        <button class="btn btn-primary w-50" id="btnBuscar">
+            <i class="fa fa-filter me-1"></i> Filtrar
+        </button>
+        <button class="btn btn-success w-50" onclick="abrirModal('/Productos/CreateOrEdit')">
+            <i class="fa fa-plus me-1"></i> Agregar
+        </button>
+    </div>
+</div>
+
+<div id="divResultados"></div>
+
+@section Scripts {
+    <script>
+        function abrirModal(url) {
+            $("#modalGenerico .modal-content").load(url, function () {
+                $("#modalGenerico").modal("show");
+            });
+        }
+
+        function eliminar(id) {
+            if (confirm("¿Seguro que deseas eliminar este producto?")) {
+                $.post("/Productos/Delete/" + id, function () {
+                    cargarTabla();
+                });
+            }
+        }
+
+        function cargarTabla() {
+            var nombre = $("#filtroNombre").val();
+            var categoria = $("#filtroCategoria").val();
+            var talle = $("#filtroTalle").val();
+            $("#divResultados").load("/Productos/ViewAll?nombre=" + encodeURIComponent(nombre)
+                + "&categoria=" + encodeURIComponent(categoria)
+                + "&talle=" + encodeURIComponent(talle));
+        }
+
+        $(document).ready(function () {
+            cargarTabla();
+
+            $("#btnBuscar").click(function () {
+                cargarTabla();
+            });
+
+            $(document).on("submit", "form", function (e) {
+                e.preventDefault();
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),
+                    data: form.serialize(),
+                    success: function (res) {
+                        if (res.success) {
+                            $("#modalGenerico").modal("hide");
+                            cargarTabla();
+                        } else {
+                            $("#modalGenerico .modal-content").html(res);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

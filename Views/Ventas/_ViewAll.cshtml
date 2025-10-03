@@ -1,0 +1,53 @@
+﻿@model List<AmperImp.Models.Venta>
+@using AmperImp.Models
+
+<table class="table table-bordered table-striped align-middle text-center">
+    <thead>
+        <tr>
+            <th class="align-middle text-center">Fecha</th>
+            <th class="align-middle text-center">Comprador</th>
+            <th class="align-middle text-center">Total</th>
+            <th class="align-middle text-center">Detalles</th>
+            <th class="align-middle text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var v in Model)
+        {
+            // Obtengo el comprador del primer detalle (asumo mismo comprador en todos)
+            var comprador = v.Detalles.FirstOrDefault()?.Comprador ?? "N/A";
+            var total = v.Detalles.Sum(d => d.Subtotal);
+
+            <tr>
+                <td>@v.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@comprador</td>
+                <td style="white-space:nowrap;">@String.Format("{0:C}", total)</td>
+                <td>
+                    <button class="btn btn-sm btn-info" title="Ver Detalles" onclick="abrirModal('/Ventas/Show/@v.Id')">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-warning" title="Editar" onclick="abrirModal('/Ventas/CreateOrEdit/@v.Id')">
+                        <i class="fa fa-pen"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger" title="Eliminar" onclick="eliminar(@v.Id)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        function eliminar(id) {
+            if (confirm("¿Seguro que deseas eliminar esta venta?")) {
+                $.post("/Ventas/Delete/" + id, function () {
+                    cargarTabla();
+                });
+            }
+        }
+    </script>
+}

@@ -1,0 +1,113 @@
+[
+  {
+    "Id": 2,
+    "Nombre": "Camiseta River Hincha",
+    "Categoria": "Camiseta",
+    "PrecioVenta": 34000.00,
+    "Costo": 21500.00,
+    "StockTalles": [
+      {
+        "Talle": "XS",
+        "Cantidad": 3
+      },
+      {
+        "Talle": "S",
+        "Cantidad": 3
+      },
+      {
+        "Talle": "M",
+        "Cantidad": 3
+      },
+      {
+        "Talle": "L",
+        "Cantidad": 2
+      },
+      {
+        "Talle": "XL",
+        "Cantidad": 1
+      },
+      {
+        "Talle": "XXL",
+        "Cantidad": 3
+      },
+      {
+        "Talle": "XXXL",
+        "Cantidad": 3
+      }
+    ]
+  },
+  {
+    "Id": 27,
+    "Nombre": "Camiseta Liverpool",
+    "Categoria": "Camiseta",
+    "PrecioVenta": 36000.00,
+    "Costo": 21500.00,
+    "StockTalles": [
+      {
+        "Talle": "XS",
+        "Cantidad": 1
+      },
+      {
+        "Talle": "S",
+        "Cantidad": 0
+      },
+      {
+        "Talle": "M",
+        "Cantidad": 0
+      },
+      {
+        "Talle": "L",
+        "Cantidad": 0
+      },
+      {
+        "Talle": "XL",
+        "Cantidad": 0
+      },
+      {
+        "Talle": "XXL",
+        "Cantidad": 0
+      },
+      {
+        "Talle": "XXXL",
+        "Cantidad": 0
+      }
+    ]
+  },
+  {
+    "Id": 352,
+    "Nombre": "Camiseta Napoli",
+    "Categoria": "Camiseta",
+    "PrecioVenta": 28000,
+    "Costo": 17000,
+    "StockTalles": [
+      {
+        "Talle": "XS",
+        "Cantidad": 0
+      },
+      {
+        "Talle": "S",
+        "Cantidad": 0
+      },
+      {
+        "Talle": "M",
+        "Cantidad": 0
+      },
+      {
+        "Talle": "L",
+        "Cantidad": 1
+      },
+      {
+        "Talle": "XL",
+        "Cantidad": 0
+      },
+      {
+        "Talle": "XXL",
+        "Cantidad": 0
+      },
+      {
+        "Talle": "XXXL",
+        "Cantidad": 0
+      }
+    ]
+  }
+]

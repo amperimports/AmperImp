@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+    <div class="row g-4 text-center">
+        <!-- Productos -->
+        <div class="col-md-4">
+            <div class="card shadow-lg bg-dark text-light h-100 border-0">
+                <div class="p-2">
+                    <img src="~/images/productos.jpg"
+                         class="img-fluid rounded shadow-sm"
+                         alt="Productos"
+                         style="height:200px; object-fit:cover; width:100%;" />
+                </div>
+                <div class="card-body p-3">
+                    <h5 class="card-title fw-bold">Productos</h5>
+                    <p class="card-text text-muted">Gestiona tu inventario y controla el stock fácilmente.</p>
+                    <a asp-controller="Productos" asp-action="Index" class="btn btn-primary w-100">
+                        <i class="fa fa-boxes-stacked me-1"></i> Ir a Productos
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ventas -->
+        <div class="col-md-4">
+            <div class="card shadow-lg bg-dark text-light h-100 border-0">
+                <div class="p-2">
+                    <img src="~/images/ventas.jpg"
+                         class="img-fluid rounded shadow-sm"
+                         alt="Ventas"
+                         style="height:200px; object-fit:cover; width:100%;" />
+                </div>
+                <div class="card-body p-3">
+                    <h5 class="card-title fw-bold">Ventas</h5>
+                    <p class="card-text text-muted">Registra y analiza todas tus ventas de manera organizada.</p>
+                    <a asp-controller="Ventas" asp-action="Index" class="btn btn-success w-100">
+                        <i class="fa fa-cart-shopping me-1"></i> Ir a Ventas
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-lg bg-dark text-light h-100 border-0">
+                <div class="p-2">
+                    <img src="~/images/finanzas.jpg"
+                         class="img-fluid rounded shadow-sm"
+                         alt="Finanzas"
+                         style="height:200px; object-fit:cover; width:100%;" />
+                </div>
+                <div class="card-body p-3">
+                    <h5 class="card-title fw-bold">Finanzas</h5>
+                    <p class="card-text text-muted">Lleva el control de tus ingresos, egresos y balances.</p>
+                    <button asp-controller="Finanzas" asp-action="Index" class="btn btn-warning w-100" disabled>
+                        <i class="fa fa-money-bill-wave me-1"></i> Ir a Finanzas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+

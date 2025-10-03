@@ -1,0 +1,39 @@
+﻿@model List<AmperImp.Models.DetalleVenta>
+@using AmperImp.Models
+
+@if (Model == null || !Model.Any())
+{
+    <p class="text-center text-muted">No hay detalles cargados.</p>
+}
+else
+{
+    <table class="table table-sm table-bordered table-striped align-middle text-center">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Talle</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var d in Model)
+            {
+                <tr data-productoid="@d.ProductoId" data-talle="@d.Talle">
+                    <td class="text-start">@d.NombreProducto</td>
+                    <td>@d.Talle</td>
+                    <td>@d.Cantidad</td>
+                    <td>@String.Format("{0:C}", d.PrecioUnitario)</td>
+                    <td>@String.Format("{0:C}", d.Subtotal)</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-danger btnEliminarDetalle">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

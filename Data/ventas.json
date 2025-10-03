@@ -1,0 +1,63 @@
+[
+  {
+    "Id": 1,
+    "Fecha": "2025-10-02T15:30:00",
+    "Comprador": null,
+    "Detalles": [
+      {
+        "ProductoId": 2,
+        "NombreProducto": "Camiseta River Hincha",
+        "Comprador": "Juan P\u00E9rez",
+        "Categoria": "Short",
+        "Talle": "XL",
+        "Cantidad": 2,
+        "PrecioUnitario": 34000,
+        "Subtotal": 68000
+      }
+    ]
+  },
+  {
+    "Id": 1409,
+    "Fecha": "2025-10-03T12:10:00",
+    "Comprador": "Miguel Almiron",
+    "Detalles": [
+      {
+        "ProductoId": 2,
+        "NombreProducto": "Camiseta River Hincha",
+        "Comprador": "Miguel Almiron",
+        "Categoria": "Camiseta",
+        "Talle": "XL",
+        "Cantidad": 1,
+        "PrecioUnitario": 34000,
+        "Subtotal": 34000
+      }
+    ]
+  },
+  {
+    "Id": 353,
+    "Fecha": "2025-10-03T14:32:00",
+    "Comprador": "Joaquin Montenegro",
+    "Detalles": [
+      {
+        "ProductoId": 27,
+        "NombreProducto": "Camiseta Liverpool",
+        "Comprador": "Joaquin Montenegro",
+        "Categoria": "Camiseta",
+        "Talle": "XL",
+        "Cantidad": 1,
+        "PrecioUnitario": 36000,
+        "Subtotal": 36000
+      },
+      {
+        "ProductoId": 27,
+        "NombreProducto": "Camiseta Liverpool",
+        "Comprador": "Joaquin Montenegro",
+        "Categoria": "Camiseta",
+        "Talle": "XXL",
+        "Cantidad": 1,
+        "PrecioUnitario": 36000,
+        "Subtotal": 36000
+      }
+    ]
+  }
+]
