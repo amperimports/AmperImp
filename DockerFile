@@ -1,22 +1,20 @@
-# Etapa 1: build
+# Etapa de build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copiar csproj y restaurar dependencias
+# Copiar csproj y restaurar
 COPY *.csproj ./
 RUN dotnet restore
 
-# Copiar todo y compilar
+# Copiar todo el código
 COPY . ./
-RUN dotnet publish -c Release -o /app
+RUN dotnet publish -c Release -o /app/publish
 
-# Etapa 2: runtime
+# Etapa runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-COPY --from=build /app ./
+COPY --from=build /app/publish .
 
-# Puerto de escucha (Render detecta automáticamente)
+# Expone el puerto (Render lo usa)
 EXPOSE 8080
-ENV ASPNETCORE_URLS=http://+:8080
-
 ENTRYPOINT ["dotnet", "AmperImp.dll"]
